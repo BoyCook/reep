@@ -1,0 +1,64 @@
+@main("MyTasks - Task Types") {
+
+    <div class="modal fade" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Add a type</h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="nameField">Name</label>
+                            <input type="text" class="form-control" id="nameField" placeholder="Enter name"
+                                data-bind="value: nameField"/>
+
+                            <label for="descriptionField">Description</label>
+                            <input type="text" class="form-control" id="descriptionField" placeholder="Enter description"
+                                   data-bind="value: descriptionField"/>
+
+                            <label for="businessFunctionField">Business Function</label>
+                            <input type="text" class="form-control" id="businessFunctionField" placeholder="Enter Business Function"
+                                   data-bind="value: businessFunctionField"/>
+
+                            <label for="subFunctionField">Sub-Function</label>
+                            <input type="text" class="form-control" id="subFunctionField" placeholder="Enter Sub-Function"
+                                   data-bind="value: subFunctionField"/>
+
+                            <label for="systemField">System</label>
+                            <input type="text" class="form-control" id="systemField" placeholder="Enter system"
+                                   data-bind="value: systemField"/>
+
+                            <label for="lobField">LOB</label>
+                            <input type="text" class="form-control" id="lobField" placeholder="Enter LOB"
+                                   data-bind="value: lobField"/>
+
+                            <label for="uriPatternField">URI</label>
+                            <input type="text" class="form-control" id="uriPatternField" placeholder="Enter URI pattern"
+                                   data-bind="value: uriPatternField"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" data-bind="click: add">Add type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Types</h2>
+            <p>Add a type: <a data-toggle="modal" href="#addTypeModal" class="btn btn-primary">Add type</a></p>
+        </div>
+        <div class="col-md-8">
+            <ul class="list-unstyled types" data-bind="foreach: types">
+                <li><a target="_blank" data-bind="attr: { href: $data.uri, title: $data.description }, text: $data.description">Foo</a></li>
+            </ul>
+        </div>
+    </div>
+} {
+<script data-main="@routes.Assets.at("javascripts/types.js")" type='text/javascript' src='@routes.WebJarAssets.requirejs'></script>
+}
