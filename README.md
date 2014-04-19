@@ -42,22 +42,22 @@ Loosely coupled data structures can be formed to add a semantic layer on top of 
 
 ##### Basic Entity
 
-* http://{domain}.repo.io/{entity}
-* http://{domain}.repo.io/{entity}/{version}
-* http://{domain}.repo.io/{subdomain}/{entity}
-* http://{domain}.repo.io/{subdomain}/{entity}/{version}
+* `http://{domain}.repo.io/{entity}`
+* `http://{domain}.repo.io/{entity}/{version}`
+* `http://{domain}.repo.io/{subdomain}/{entity}`
+* `http://{domain}.repo.io/{subdomain}/{entity}/{version}`
 
 ##### Model
 
-* http://{domain}.repo.io/types
-* http://{domain}.repo.io/types/{name}
+* `http://{domain}.repo.io/types`
+* `http://{domain}.repo.io/types/{name}`
 
 ##### Queries
 
-* http://{domain}.repo.io/<data>/(<query>)
-* http://{domain}.repo.io/<data>/<id>/<association>/(<query>)
-* http://{domain}.repo.io/<data>/(<query>)/<association>
-* http://{domain}.repo.io/<data>/<id>|(<query>)/<association>/(<query>)/<association>/...
+* `http://{domain}.repo.io/<data>/(<query>)`
+* `http://{domain}.repo.io/<data>/<id>/<association>/(<query>)`
+* `http://{domain}.repo.io/<data>/(<query>)/<association>`
+* `http://{domain}.repo.io/<data>/<id>|(<query>)/<association>/(<query>)/<association>/...`
 
 Where queries apply to the left hand block. Also sort/filter parameters can be applied via querystrings.
 
