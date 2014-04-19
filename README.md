@@ -8,7 +8,7 @@
 Data can be stored at the lowest level as an `entity`. Entities can then be bundled into `domains` and `subdomains`.
 Loosely coupled data structures can be formed to add a semantic layer on top of the entities.
 
-##### Some key concepts
+##### Key Concepts
 
 * Data and meta data (model) will be stored as entities
 * Extensible, loosely coupled entities
@@ -28,7 +28,7 @@ Loosely coupled data structures can be formed to add a semantic layer on top of 
 * http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model
 * http://en.wikipedia.org/wiki/Sparse_matrix
 
-### Default types
+### Default Types / Reserved
 
 * `Entity`
 * `Model`
