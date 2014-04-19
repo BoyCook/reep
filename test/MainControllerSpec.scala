@@ -1,6 +1,6 @@
-import controllers.{MainController, TypeController}
+import controllers.{MainController, ModelController}
 import models.{Model}
-import services.TypeDao
+import services.ModelDao
 
 import org.specs2.mutable.Specification
 import MongoDBTestUtils._

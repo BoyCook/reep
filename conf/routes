@@ -12,11 +12,11 @@ GET         /                           controllers.MainController.index(path = 
 GET         /events                     controllers.MainController.events
 GET         /events/:ein/tasks          controllers.MainController.eventsForEmployee(ein: String)
 
-GET         /types                      controllers.TypeController.getAll(page: Int ?= 0, perPage: Int ?= 10)
-POST        /types                      controllers.TypeController.add
-GET         /types/add                  controllers.TypeController.index
-GET         /types/:code                controllers.TypeController.get(code: String)
-POST        /types/:code                controllers.TypeController.update(code: String)
+GET         /types                      controllers.ModelController.getAll(page: Int ?= 0, perPage: Int ?= 10)
+POST        /types                      controllers.ModelController.add
+GET         /types/add                  controllers.ModelController.index
+GET         /types/:code                controllers.ModelController.get(code: String)
+POST        /types/:code                controllers.ModelController.update(code: String)
 
 
 # Every other page

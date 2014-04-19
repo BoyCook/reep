@@ -19,7 +19,6 @@ object ModelDao {
 
   /** The model collection */
   private def collection = ReactiveMongoPlugin.db.collection[JSONCollection]("model")
-//  collection.indexesManager.ensure(Index(List("name" -> IndexType.Ascending), unique = true))
   collection.indexesManager.ensure(Index(Seq("name" -> IndexType.Ascending), name = Some("name_idx"), unique = true, sparse = true))
 
   /**
@@ -50,14 +49,14 @@ object ModelDao {
   }
 
   /**
-   * Get an individual model by code
+   * Get an individual model by name
    *
-   * @param name of the model
+   * @param code of the model
    * @return the individual model
    */
-  def find(name: String): Future[Option[Model]] = {
+  def find(code: String): Future[Option[Model]] = {
     collection
-      .find(Json.obj("name" -> name))
+      .find(Json.obj("name" -> code))
       .one[Model]
   }
 

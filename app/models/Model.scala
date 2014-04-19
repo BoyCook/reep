@@ -9,8 +9,8 @@ import play.modules.reactivemongo.json.BSONFormats._
  */
 
 case class Model(_id: BSONObjectID,
-                    name: String,
-                    description: String)
+                name: String,
+         description: String)
 
 object Model {
   implicit val typeFormat = Json.format[Model]

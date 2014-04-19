@@ -3,16 +3,16 @@ package controllers
 import play.api.mvc._
 import play.api.libs.json.Json
 import play.api.libs.concurrent.Execution.Implicits._
-import services.{TypeDao}
+import services.{ModelDao}
 import scala.concurrent.Future
 import models.Model
 import reactivemongo.bson.BSONObjectID
 
-object TypeController extends Controller {
+object ModelController extends Controller {
 
-  implicit val taskFormFormat = Json.format[TaskTypeForm]
+  implicit val taskFormFormat = Json.format[ModelForm]
 
-  case class TaskTypeForm(name: String,
+  case class ModelForm(name: String,
                           code: String,
                           description: String) {
     def toTaskType: Model = Model(BSONObjectID.generate, name, code)
@@ -29,8 +29,8 @@ object TypeController extends Controller {
   def getAll(page: Int, perPage: Int) = Action.async {
     implicit req =>
       for {
-        count <- TypeDao.count
-        types <- TypeDao.findAll(page, perPage)
+        count <- ModelDao.count
+        types <- ModelDao.findAll(page, perPage)
       } yield {
         val result = Ok(Json.toJson(types))
 //        Calculate paging headers, if necessary
@@ -42,14 +42,14 @@ object TypeController extends Controller {
         } else {
           result.withHeaders("Link" -> links.map {
             case (rel, p) =>
-              "<" + routes.TypeController.getAll(p, perPage).absoluteURL() + ">; rel=\"" + rel + "\""
+              "<" + routes.ModelController.getAll(p, perPage).absoluteURL() + ">; rel=\"" + rel + "\""
           }.mkString(", "))
         }
       }
   }
 
   def get(code: String) = Action.async {
-    implicit req => TypeDao.find(code).map{
+    implicit req => ModelDao.find(code).map{
       case Some(taskType) => Ok(Json.toJson(taskType))
       case None => NotFound(Json.obj("message" -> "No such type"))
     }
@@ -58,9 +58,9 @@ object TypeController extends Controller {
   //TODO: validate params match object
   def update(code: String) = Action.async(parse.json) {
     req =>
-      Json.fromJson[TaskTypeForm](req.body).fold(
+      Json.fromJson[ModelForm](req.body).fold(
         invalid => Future.successful(BadRequest("Bad type form")),
-        form => TypeDao.save(form.toTaskType).map(_ => Created)
+        form => ModelDao.save(form.toTaskType).map(_ => Created)
       )
   }
 

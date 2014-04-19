@@ -20,9 +20,9 @@ object MainController extends Controller {
     Ok(
       Routes.javascriptRouter("routes")(
         routes.javascript.MainController.events,
-        routes.javascript.TypeController.getAll,
-        routes.javascript.TypeController.get,
-        routes.javascript.TypeController.add
+        routes.javascript.ModelController.getAll,
+        routes.javascript.ModelController.get,
+        routes.javascript.ModelController.add
       )
     ).as("text/javascript")
   }

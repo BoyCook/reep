@@ -1,6 +1,6 @@
-import controllers.{TypeController}
+import controllers.{ModelController}
 import models.{Model}
-import services.TypeDao
+import services.ModelDao
 
 import org.specs2.mutable.Specification
 import MongoDBTestUtils._
@@ -13,17 +13,16 @@ import reactivemongo.bson.BSONObjectID
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-object TypeControllerSpec extends Specification {
+object ModelControllerSpec extends Specification {
 
   "the type controller" should {
 
     val fooJSON = Json.obj("name" -> "Foo Name",
-      "name" -> "FOO",
-      "description" -> "Foo Desc")
+                    "description" -> "Foo Desc")
 
     "save a type" in withMongoDb { implicit app =>
-      status(TypeController.add()(FakeRequest().withBody(fooJSON))) must_== CREATED
-      val types = Await.result(TypeDao.findAll(0, 10), Duration.Inf)
+      status(ModelController.add()(FakeRequest().withBody(fooJSON))) must_== CREATED
+      val types = Await.result(ModelDao.findAll(0, 10), Duration.Inf)
       types must haveSize(1)
       types.head.name must_== "Foo Name"
       types.head.description must_== "Foo Desc"
@@ -35,9 +34,9 @@ object TypeControllerSpec extends Specification {
 //    }
 
     "get types" in withMongoDb { implicit app =>
-      createType("Foo Name", "Foo Desc")
-      createType("Bar Name", "Bar Desc")
-      val types = Json.parse(contentAsString(TypeController.getAll(0, 10)(FakeRequest()))).as[Seq[Model]]
+      createModel("Foo Name", "Foo Desc")
+      createModel("Bar Name", "Bar Desc")
+      val types = Json.parse(contentAsString(ModelController.getAll(0, 10)(FakeRequest()))).as[Seq[Model]]
       types must haveSize(2)
 
       types(1).name must_== "Foo Name"
@@ -49,10 +48,10 @@ object TypeControllerSpec extends Specification {
 
     "page types" in withMongoDb { implicit app =>
       for (i <- 1 to 30) {
-        createType("Name " + i, "Desc " + i)
+        createModel("Name " + i, "Desc " + i)
       }
       def test(page: Int, perPage: Int) = {
-        val result = TypeController.getAll(page, perPage)(FakeRequest())
+        val result = ModelController.getAll(page, perPage)(FakeRequest())
         val (prev, next) = header("Link", result).map { link =>
           (extractLink("prev", link), extractLink("next", link))
         }.getOrElse((None, None))

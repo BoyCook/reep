@@ -10,7 +10,7 @@ import reactivemongo.api.DefaultDB
 import reactivemongo.bson.BSONObjectID
 import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
-import services.{TypeDao}
+import services.{ModelDao}
 
 /**
  * Test utils for running tests with MongoDB
@@ -36,14 +36,13 @@ object MongoDBTestUtils {
 
   def dropAll(db: DefaultDB) = {
     Await.ready(Future.sequence(Seq(
-      db.collection[JSONCollection]("tasks").drop(),
-      db.collection[JSONCollection]("types").drop(),
+      db.collection[JSONCollection]("model").drop(),
       db.collection[JSONCollection]("events").drop()
     )), 2 seconds)
   }
 
-  def createType(name: String,
+  def createModel(name: String,
                  description: String) = {
-    Await.result(TypeDao.save(Model(BSONObjectID.generate, name, description)), Duration.Inf)
+    Await.result(ModelDao.save(Model(BSONObjectID.generate, name, description)), Duration.Inf)
   }
 }
