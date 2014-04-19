@@ -1,4 +1,4 @@
-import models.{Type}
+import models.{Model}
 import org.joda.time.DateTime
 import play.api._
 import play.api.test._
@@ -43,13 +43,7 @@ object MongoDBTestUtils {
   }
 
   def createType(name: String,
-                 code: String,
-                 description: String,
-                 businessFunction: String,
-                 subFunction: String,
-                 system: String,
-                 lob: String,
-                 uriPattern: String) = {
-    Await.result(TypeDao.save(Type(BSONObjectID.generate, name, code, description, businessFunction, subFunction, system, lob, uriPattern)), Duration.Inf)
+                 description: String) = {
+    Await.result(TypeDao.save(Model(BSONObjectID.generate, name, description)), Duration.Inf)
   }
 }

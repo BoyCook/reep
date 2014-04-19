@@ -19,7 +19,7 @@ Loosely coupled data structures can be formed to add a semantic layer on top of 
 * Pricing model options:
    * Free for low storage / bandwidth, pay for higher usages
    * Free for public data, pay for private
-* `domain` maps to URL subdomain: http://{domain}.repo.io
+* `domain` maps to URL subdomain: `http://{domain}.repo.io`
 * PaaS / BaaS
 * Whole platform can run locally and sync to hosted service
 * Implicit model generation

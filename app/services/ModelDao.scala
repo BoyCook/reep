@@ -14,18 +14,18 @@ import reactivemongo.core.commands.Count
 import reactivemongo.bson.BSONObjectID
 import reactivemongo.api.indexes.{IndexType, Index}
 
-/** A data access object for types backed by a MongoDB collection */
-object TypeDao {
+/** A data access object for model backed by a MongoDB collection */
+object ModelDao {
 
-  /** The types collection */
-  private def collection = ReactiveMongoPlugin.db.collection[JSONCollection]("types")
+  /** The model collection */
+  private def collection = ReactiveMongoPlugin.db.collection[JSONCollection]("model")
 //  collection.indexesManager.ensure(Index(List("name" -> IndexType.Ascending), unique = true))
-  collection.indexesManager.ensure(Index(Seq("name" -> IndexType.Ascending), name = Some("code_idx"), unique = true, sparse = true))
+  collection.indexesManager.ensure(Index(Seq("name" -> IndexType.Ascending), name = Some("name_idx"), unique = true, sparse = true))
 
   /**
-   * Save a type.
+   * Save a model.
    *
-   * @return The saved type, once saved.
+   * @return The saved model, once saved.
    */
   def save(taskType: Model): Future[Model] = {
     collection.save(taskType).map {
@@ -35,11 +35,11 @@ object TypeDao {
   }
 
   /**
-   * Find all the types.
+   * Find all the model.
    *
    * @param page The page to retrieve, 0 based.
    * @param perPage The number of results per page.
-   * @return All of the types.
+   * @return All of the model.
    */
   def findAll(page: Int, perPage: Int): Future[Seq[Model]] = {
     collection.find(Json.obj())
@@ -50,21 +50,21 @@ object TypeDao {
   }
 
   /**
-   * Get an individual type by name
+   * Get an individual model by code
    *
-   * @param code of the type
-   * @return the individual type
+   * @param name of the model
+   * @return the individual model
    */
-  def find(code: String): Future[Option[Model]] = {
+  def find(name: String): Future[Option[Model]] = {
     collection
-      .find(Json.obj("name" -> code))
+      .find(Json.obj("name" -> name))
       .one[Model]
   }
 
   /**
-   * Get a individual type by ID
-   * @param id of the type
-   * @return the individual type
+   * Get a individual model by ID
+   * @param id of the model
+   * @return the individual model
    */
   def findById(id: BSONObjectID): Future[Option[Model]] = {
     collection
@@ -72,7 +72,7 @@ object TypeDao {
     .one[Model]
   }
 
-  /** The total number of types */
+  /** The total number of model */
   def count: Future[Int] = {
     ReactiveMongoPlugin.db.command(Count(collection.name))
   }

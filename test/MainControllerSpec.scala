@@ -1,5 +1,5 @@
 import controllers.{MainController, TypeController}
-import models.{Type}
+import models.{Model}
 import services.TypeDao
 
 import org.specs2.mutable.Specification

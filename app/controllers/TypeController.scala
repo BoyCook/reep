@@ -5,7 +5,7 @@ import play.api.libs.json.Json
 import play.api.libs.concurrent.Execution.Implicits._
 import services.{TypeDao}
 import scala.concurrent.Future
-import models.Type
+import models.Model
 import reactivemongo.bson.BSONObjectID
 
 object TypeController extends Controller {
@@ -14,13 +14,8 @@ object TypeController extends Controller {
 
   case class TaskTypeForm(name: String,
                           code: String,
-                          description: String,
-                          businessFunction: String,
-                          subFunction: String,
-                          system: String,
-                          lob: String,
-                          uriPattern: String) {
-    def toTaskType: Type = Type(BSONObjectID.generate, name, code, description, businessFunction, subFunction, system, lob, uriPattern)
+                          description: String) {
+    def toTaskType: Model = Model(BSONObjectID.generate, name, code)
   }
 
   def index = Action {
