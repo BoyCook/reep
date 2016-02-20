@@ -2,11 +2,17 @@
 
 “repo” is a hosted platform for data storing and information collaboration.
 
-
 ### Overview
 
 Data can be stored at the lowest level as an `entity`. Entities can then be bundled into `domains` and `subdomains`.
 Loosely coupled data structures can be formed to add a semantic layer on top of the entities.
+
+##### Main Components
+
+* Adaptive multi content REST API. At its core is an API that can store and serve objects of any content type
+* Transform layer. This can transform data into a format different to how it's stored i.e. markdown to HTML
+* Data store. This is the main object store. Exposed via an interface it can have different implementations depending on requirements. e.g. MongoDB, FS, in-memory 
+
 
 ##### Key Concepts
 
