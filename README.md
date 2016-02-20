@@ -91,3 +91,26 @@ Where queries apply to the left hand block. Also sort/filter parameters can be a
    “reverseName”: “text”
 }
 ```
+
+### Build 
+[![Build Status](https://travis-ci.org/BoyCook/ExampleWebapp.png?branch=master)](https://travis-ci.org/BoyCook/ExampleWebapp)
+[![Coverage Status](https://coveralls.io/repos/BoyCook/ExampleWebapp/badge.png)](https://coveralls.io/r/BoyCook/ExampleWebapp)
+
+### DESCRIPTION
+
+An example webapp
+
+### Building
+
+Tests
+
+    mvn clean test
+
+Coverage
+
+    mvn clean cobertura:cobertura
+
+
+#### Running
+
+    mvn clean jetty:run
